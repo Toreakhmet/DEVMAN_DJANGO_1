@@ -104,10 +104,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Установите эту строку на ваш путь
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Установите эту строку на ваш путь
 MEDIA_URL = '/media/'  # URL, по которому будут обслуживаться медиафайлы
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Абсолютный путь к папке, где будут сохраняться медиафайлы
 
