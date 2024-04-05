@@ -4,6 +4,8 @@
 
 
 Это код первого урока в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org)
+ссылка на сайт https://salamat.pythonanywhere.com
+ссылка на админку https://salamat.pythonanywhere.com/admin/
 
 
 ## Переменные окружения
