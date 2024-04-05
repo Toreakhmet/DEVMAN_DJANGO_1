@@ -35,7 +35,7 @@ class ImageAdmin(admin.ModelAdmin):
     autocomplete_fields = ["place"]
 
     @staticmethod
-    def image_preview(obj):
+    def image_preview(obj): 
         if obj.img:
             return format_html('<img src="{url}" height=200px/>',
                                url=obj.img.url)
