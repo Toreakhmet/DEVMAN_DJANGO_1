@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-^3n^g6=d+^^!r**u_u2z)s*qv5bq$2u8fw^9kb^yxmu)u2y-5k')
 
 # SECURITY WARNIN: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG",1)==True
+DEBUG = 0
 
 ALLOWED_HOSTS = ["127.0.0.1"]
 
@@ -99,10 +99,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.environ.get('STATIC_ROOT', os.path.join(BASE_DIR, 'static'))  # Set this to your path
 MEDIA_URL = '/media/'  # URL to serve media files
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))  # Absolute path to folder where media files will be saved
-
-# Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
