@@ -33,13 +33,13 @@ class Command(BaseCommand):
             for index, img_url in enumerate(payload['imgs']):
                 img_response = requests.get(img_url)
                 img_response.raise_for_status()
-                content_file = ContentFile(img_response.content)
-                new_image = Image(place=place, position=index)
-                new_image.img.save(parse_img_name(img_url), content_file, save=False)
-                new_image.save()
+                image_name = parse_img_name(img_url)
+                new_image = Image.objects.create(
+                    place=place,
+                    position=index,
+                    img=ContentFile(img_response.content, name=image_name)
+                )
 
             self.stdout.write(self.style.SUCCESS(f'Successfully loaded url "{url}"'))
 
-
-def parse_img_name(url):
-    return Path(unquote(url)).name
+    
