@@ -1,4 +1,3 @@
-from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
 from django.utils.html import format_html
 from tinymce.widgets import TinyMCE
@@ -10,12 +9,12 @@ from .models import Place, Image
 class ImageInline(admin.TabularInline):
     model = Image
     extra = 0
-    readonly_fields = ["preview_image"]
+    readonly_fields = ["get_image_preview"]
 
     @staticmethod
-    def preview_image(obj):
+    def get_image_preview(obj):
         if obj.img:
-            return format_html('<img src="{url}" weight=200     `height=200px/>' ,
+            return format_html('<img src="{url}" style="max-width:200px; max-height:200px;" />' ,
                                url=obj.img.url)
         return format_html('<p>Здесь будет превью, когда вы выберете файл</p>')
 
@@ -31,14 +30,14 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    readonly_fields = ["preview_image"]
+    readonly_fields = ["get_image_preview"]
     raw_id_fields = ["place", ]
     autocomplete_fields = ["place"]
 
     @staticmethod
-    def preview_image(obj):
+    def get_image_preview(obj):
         if obj.img:
-            return format_html('<img src="{url}" height=200px/>',
+            return format_html('<img src="{url}" style="max-width:200px; max-height:200px;" />',
                                url=obj.img.url)
         return format_html(
             '<p>Здесь будет превью, когда вы создадите изображение</p>')
