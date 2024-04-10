@@ -38,6 +38,9 @@ where_to_go
 SECRET_KEY=your_secret_key_keep_it_in_secret
 DEBUG=true
 ALLOWED_HOSTS=127.0.0.1,localhost
+STATIC_ROOT=/path/to/static/files
+MEDIA_ROOT=/path/to/media/files
+
 ```
 4. Создать и наполнить бд тестовыми данными
 ```
