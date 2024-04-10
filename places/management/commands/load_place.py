@@ -8,9 +8,8 @@ from django.core.exceptions import MultipleObjectsReturned
 
 from places.models import Place, Image
 
-
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'Loads data from specified URLs into the database'
 
     def add_arguments(self, parser):
         parser.add_argument('urls', nargs='+', type=str)
@@ -25,10 +24,10 @@ class Command(BaseCommand):
                 place, created = Place.objects.get_or_create(
                     title=payload['title'],
                     defaults={
-                        'description_short': payload['description_short'],
-                        'description_long': payload['description_long'],
-                        'lat': payload['coordinates']['lat'],
-                        'lon': payload['coordinates']['lng']
+                        'short_description': payload.get('description_short', ''),
+                        'long_description': payload.get('description_long', ''),
+                        'latitude': payload['coordinates']['lat'],
+                        'longitude': payload['coordinates']['lng']
                     }
                 )
             except MultipleObjectsReturned:
@@ -38,11 +37,11 @@ class Command(BaseCommand):
             for index, img_url in enumerate(payload['imgs']):
                 img_response = requests.get(img_url)
                 img_response.raise_for_status()
-                image_name = parse_img_name(img_url) # type: ignore
+                image_name = unquote(Path(img_url).name) # Parse image name correctly
                 new_image = Image.objects.create(
                     place=place,
                     position=index,
-                    img=ContentFile(img_response.content, name=image_name)
+                    image=ContentFile(img_response.content, name=image_name)
                 )
 
-            self.stdout.write(self.style.SUCCESS(f'Successfully loaded url "{url}"'))
+            self.stdout.write(self.style.SUCCESS(f'Successfully loaded data from url "{url}"'))
