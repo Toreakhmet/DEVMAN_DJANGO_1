@@ -50,8 +50,8 @@ def get_place(request, place_id):
     context = {
         "title": place.title,
         "images": images_urls,
-        "short_description": place.description_short,
-        "long_description": place.description_long,
+        "short_description": place.short_description,
+        "long_description": place.long_description,
         "coordinates": {
             "lng": place.lon,
             "lat": place.lat
