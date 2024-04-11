@@ -53,8 +53,8 @@ def get_place(request, place_id):
         "short_description": place.short_description,
         "long_description": place.long_description,
         "coordinates": {
-            "lng": place.lon,
-            "lat": place.lat
+            "lng": place.longitude,
+            "lat": place.latitude
         }
     }
 
